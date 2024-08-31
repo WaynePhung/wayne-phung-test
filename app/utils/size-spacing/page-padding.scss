@@ -1,0 +1,67 @@
+@use "./../../utils/mixins-other/screen-widths" as s-w;
+@use "./../../utils/size-spacing/nums-size-space" as n-s-s;
+
+nav.navigationBar, main {
+    @include s-w.mediaQuery-maxOnly(750) {
+        padding-left: map-get(n-s-s.$size-space, "m");
+        padding-right: map-get(n-s-s.$size-space, "m");
+    }
+    @include s-w.mediaQuery-minOnly(750) {
+        padding-left: map-get(n-s-s.$size-space, "xl");
+        padding-right: map-get(n-s-s.$size-space, "xl");
+    }
+}
+
+nav.navigationBar, main {
+    @include s-w.mediaQuery-maxOnly(750) {
+        max-width: calc(100% - map-get(n-s-s.$size-space, "xl"));
+    }
+    @include s-w.mediaQuery-minOnly(750) {
+        max-width: calc(100% - map-get(n-s-s.$size-space, "3xl"));
+    }
+}
+
+h2.h2-sticky, h2.sticky {
+    @include s-w.mediaQuery-maxOnly(750) {
+        padding: 0 map-get(n-s-s.$size-space, "m") map-get(n-s-s.$size-space, "m") map-get(n-s-s.$size-space, "m");
+        width: calc(100% - map-get(n-s-s.$size-space, "xl"));
+    }
+    @include s-w.mediaQuery-minOnly(750) {
+        padding: 0 map-get(n-s-s.$size-space, "xl") map-get(n-s-s.$size-space, "m") map-get(n-s-s.$size-space, "xl");
+        width: calc(100% - map-get(n-s-s.$size-space, "3xl"));
+    }
+}
+
+nav.navigationBar {
+    padding-top: map-get(n-s-s.$size-space, "s");
+    padding-bottom: map-get(n-s-s.$size-space, "s");
+}
+
+main {
+    padding-top: map-get(n-s-s.$size-space, "m");
+    padding-bottom: map-get(n-s-s.$size-space, "3xl");
+
+    & > *:not(:last-child) {
+        padding-bottom: map-get(n-s-s.$size-space, "xl");
+        // & > article:not(:last-child) {
+        //     padding-bottom: map-get(n-s-s.$size-space, "xl");
+        // }
+    }
+}
+
+footer {
+    @include s-w.mediaQuery-maxOnly(750) {
+        // padding: map-get(n-s-s.$size-space, "m") map-get(n-s-s.$size-space, "m");
+        padding-top: map-get(n-s-s.$size-space, "xl");
+        padding-right: map-get(n-s-s.$size-space, "m");
+        padding-bottom: map-get(n-s-s.$size-space, "3xl");
+        padding-left: map-get(n-s-s.$size-space, "m");
+        max-width: calc(100% - map-get(n-s-s.$size-space, "xl"));
+    }
+    @include s-w.mediaQuery-minOnly(750) {
+        padding: map-get(n-s-s.$size-space, "3xl") map-get(n-s-s.$size-space, "xl");
+        max-width: calc(100% - map-get(n-s-s.$size-space, "3xl"));
+    }
+}
+
+

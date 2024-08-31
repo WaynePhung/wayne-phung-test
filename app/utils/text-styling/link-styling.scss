@@ -1,0 +1,197 @@
+@use "./../../utils/colors/colors";
+@use "./../../utils/mixins-other/display-flex";
+@use "./../../utils/mixins-other/screen-widths" as s-w;
+@use "./../../utils/mixins-other/show-hide-toggle" as s-h-t;
+@use "./../../utils/size-spacing/nums-size-space" as n-s-s;
+@use "./../../utils/size-spacing/row-column-gaps.scss" as r-c-g;
+@use "./../../utils/variables/variables-global" as v-g;
+
+// %button-hover {
+//     cursor: pointer;
+//     a span:after {
+//         left: 0;
+//         width: 100%;
+//     }
+// }
+
+%link-hover {
+    cursor: pointer;
+    span:after {
+        left: 0;
+        width: 100%;
+    }
+}
+
+/*
+    The name "%link" defines a placeholder selector.
+    Placeholder selectors have the percent (%) character before the selector name, and they have a use case of templatizing repetitive lines of code that need to define reusable CSS properties and values for multiple elements.
+    
+    The reusable aspect of placeholder selectors is that the CSS properties and values defined won't be constantly reproduced in the outputed CSS file, reducing repetitive code and the 
+    size of the CSS file. Instead, they are used in "@extend" directives where elements that mention these directives would inherit the CSS elements, properties, and values defined in the corresponding placeholder selector.
+    
+    For example, the "%hover" placeholder selector below mentions elements that are also not the ficaption element to have the mouse cursor set to the pointer appearance and to have the text of children paragraph (p) elements to be underlined. 
+    An element that has the class name ".class" may use the extend directive to inherit the elements, cursor property, and the text-decoration property from "%hover".
+
+    .class {
+        @extend hover;
+    }
+
+    Resulting CSS output would be...
+
+    .class {
+        &:not(figcaption) {
+            cursor: pointer;
+        }
+        p {
+            text-decoration: underline;
+        }
+    }
+*/
+
+%link {
+    @include r-c-g.rowColumnGaps("m", "m");
+    position: relative;
+    cursor: default;
+    text-decoration: none;
+    span {
+        &:after {
+            display: block;
+            position: relative;
+            left: 50%;
+            bottom: 0;
+            content: "";
+            height: map-get(n-s-s.$size-space, "2xs");
+            transform: translateY(map-get(n-s-s.$size-space, "2xs"));
+            transition: width 0.1s linear 0s, left 0.1s linear 0s;
+            width: 0%;
+            height: map-get(n-s-s.$size-space, "2xs");
+        }
+    }
+    &:hover {
+        cursor: pointer;
+        span:after {
+            left: 0;
+            width: 100%;
+        }
+    }
+}
+
+%bg-default {
+    background-image: radial-gradient(transparent);
+    animation-name: noBackground;
+    @keyframes noBackground {
+        from {background-image: radial-gradient(colors.color('p', 90) 0%, transparent 75%);}
+        to {background-image: radial-gradient(transparent);}
+    }
+}
+
+%bg-hover {
+    background-image: radial-gradient(colors.color('p', 90) 0%, transparent 75%);
+    animation-name: activeBackground;
+    @keyframes activeBackground {
+        from {background-image: radial-gradient(transparent);}
+        to {background-image: radial-gradient(colors.color('p', 90) 0%, transparent 75%);}
+    }
+}
+
+%bg-default-props {
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+}
+
+header > nav.navigationBar {
+    & > a, & > nav > a {
+        @extend %link;
+        @extend %flex-row-wrap-center;
+        @extend %bg-default;
+        @extend %bg-default-props;
+        span {
+            &:after {
+                background-color: colors.color('n', 50);
+            }
+        }
+        &:hover {
+            @extend %bg-hover;
+            @extend %bg-default-props;
+        }
+        @include s-w.mediaQuery-minOnly(v-g.$bp-dt) {
+            padding: 0 map-get(n-s-s.$size-space, "m") 0 map-get(n-s-s.$size-space, "m");
+        }
+    }
+    & > a {
+        @extend %link;
+        color: colors.color('n', 30);
+        @include s-h-t.sHT-mQ-dhds(v-g.$bp-dt);
+    }
+    & > nav > a {
+        @extend %link;
+        @extend %flex-row-wrap-center;
+        color: colors.color('n', 30);
+        @include s-w.mediaQuery-maxOnly(200) {
+            padding: map-get(n-s-s.$size-space-inset, "s");
+        }
+        @include s-w.mediaQuery-minOnly(200) {
+            padding: map-get(n-s-s.$button-inset, navigationLink-mobile);
+        }
+        @include s-w.mediaQuery-maxOnly(275) {
+            width: calc(100% - (2 * (map-get(n-s-s.$size-space, "s"))));
+        }
+        @include s-w.mediaQuery-minMax(275, 375) {
+            width: calc(50% - (2 * (map-get(n-s-s.$size-space, "s"))));
+        }
+        @include s-w.mediaQuery-maxOnly(375) {
+            padding: map-get(n-s-s.$size-space-inset, "s");
+        }
+        &:first-of-type {
+            @include s-w.mediaQuery-minMax(750, v-g.$bp-dt) {
+                padding-left: 0;
+            }
+        }
+    }
+    & > .contactButtons > button > a {
+        @extend %flex-row-wrap-center;
+    }
+}
+
+main {
+    button > a {
+        @extend %flex-row-wrap-center;
+    }
+}
+
+footer {
+    article {
+        &#endMessage > .contactButtons > button > a {
+            @extend %flex-row-wrap-center;
+        }
+        &#endNavLinks > nav > a {
+            @extend %link;
+            @extend %flex-row-wrap-default;
+            @extend %bg-default;
+            @extend %bg-default-props;
+            span {
+                color: colors.color('n', 30);
+                &:after {
+                    background-color: colors.color('n', 50);
+                }
+            }
+            &:hover {
+                @extend %bg-hover;
+                @extend %bg-default-props;
+            }
+        }
+    }
+}
+
+figure {
+    & > a {
+        border: none;
+        object-fit: contain;
+        object-position: center;
+        width: 100%;
+        height: auto;
+    }
+    figcaption > a {
+        @extend %link;
+    }
+}
