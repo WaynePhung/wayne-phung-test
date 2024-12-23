@@ -85,7 +85,6 @@ h2.h2-sticky, h2.sticky {
 
 h2.h2-sticky, h2.sticky {
   position: fixed;
-  top: 0;
   left: 0;
   background-color: hsla(0, 0%, 90%, 0.9);
 }

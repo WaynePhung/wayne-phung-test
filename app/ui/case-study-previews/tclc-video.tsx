@@ -2,7 +2,7 @@ import { literata, noto_sans } from "@/app/utils/text-styling/fonts";
 import Link from "next/link";
 import ButtonSeeCaseStudy from "../buttons/button-see-case-study";
 
-export default async function TCLCVideo() {
+export default function TCLCVideo() {
     return (
         <article className="grid-default-1400 grid-case-study-preview">
             <article>

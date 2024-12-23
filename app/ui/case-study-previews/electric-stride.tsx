@@ -1,10 +1,25 @@
+'use client';
+
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { literata, noto_sans } from "@/app/utils/text-styling/fonts";
 import Image from "next/image";
 import Link from "next/link";
 import { images } from "../media/media-global";
 import ButtonSeeCaseStudy from "../buttons/button-see-case-study";
 
-export default async function ElectricStride() {
+import { changeStickyH2,  } from "@/app/utils/js/scroll-to-h2-main";
+import javascript from "@/app/utils/js/global-layout";
+
+export default function ElectricStride() {
+    // const [result, setResult] = useState(null);
+
+    // const handleClick = async () => {
+    //     // Dynamically import the function
+    //     const { javascript } = await import('./../../utils/js/global-layout');
+    //     const result = javascript();
+    //     setResult(result);
+    // };
     return (
         <article className="grid-default-1400 grid-case-study-preview">
             <article>

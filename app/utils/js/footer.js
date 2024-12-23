@@ -4,11 +4,14 @@
 // window.addEventListener ('load', adjustFooterBottomMargin);
 // window.addEventListener ('resize', adjustFooterBottomMargin);
 
+import exp from "constants";
+import React from "react";
+
 export var 
     footer = document.querySelector('footer'), 
-    header = document.querySelector('header'), 
-    footerInitialStyle = window.getComputedStyle(footer),
-    getFooterBottomMargin = footerInitialStyle.getPropertyValue('margin-bottom');
+    header = document.querySelector('header');
+    // footerInitialStyle = window.getComputedStyle(footer),
+    // getFooterBottomMargin = footerInitialStyle.getPropertyValue('margin-bottom');
 
 // window.addEventListener ('load', function() {
 //     // console.log("screen width: " + window.innerWidth);
@@ -34,9 +37,9 @@ export function adjustFooterBottomMargin() {
     // Reset footer margin and header height
     footer.style.marginBottom = '';
     header.style.height = 'auto';
-    var footerInitialStyle = window.getComputedStyle(footer),
-        getFooterBottomMargin = footerInitialStyle.getPropertyValue('margin-bottom'), 
-        headerHeight = document.querySelector('header').offsetHeight;
+    // var footerInitialStyle = window.getComputedStyle(footer),
+    //     getFooterBottomMargin = footerInitialStyle.getPropertyValue('margin-bottom'), 
+        var headerHeight = document.querySelector('header').offsetHeight;
     // console.log('Footer initial bottom margin: ' + getFooterBottomMargin);
     // console.log('Footer margin bottom before function and resizing: ' + getFooterBottomMargin);
     // Adjust footer margin based on header height
@@ -45,4 +48,7 @@ export function adjustFooterBottomMargin() {
     // Adjust content margin to prevent overlap with header
     // content.style.marginTop = "".concat(headerHeight, "px");
     // console.log('Hello world.');
+    return null;
 }
+
+export default adjustFooterBottomMargin;

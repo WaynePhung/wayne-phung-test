@@ -1,9 +1,10 @@
+import React from 'react';
 import { noto_sans } from "@/app/utils/text-styling/fonts";
 import Link from "next/link";
 import Button_LinkedIn from "../buttons/button-linkedIn";
 import Button_Email from "../buttons/button-email";
 
-export default async function NavBarGlobal() {
+export default function NavBarHome() {
     return(
         <header className={noto_sans.className} role="banner" aria-label="navigation header">
             {/* navigation tab: Container for all of the buttons, but not the progress bar. */}
@@ -15,13 +16,13 @@ export default async function NavBarGlobal() {
                 {/* Buttons to direct to general sections of the website, including design work, media work, description about me, and contact section.
                 The "Contact Me" button appears contained only in the mobile view. */}
                 <nav className="anchorLinks" role="anchorLinks" aria-label="group of main mavigation links">
-                    <Link href="/#design-work" className="navLink" role="link" aria-label="anchor link to design section of the homepage">
+                    <Link href="#design-work" className="navLink" role="link" aria-label="anchor link to design section of the homepage">
                         <span className={noto_sans.className}>Design</span>
                     </Link>
-                    <Link href="/#media-work" className="navLink" role="link" aria-label="anchor link to media section of the homepage">
+                    <Link href="#media-work" className="navLink" role="link" aria-label="anchor link to media section of the homepage">
                         <span className={noto_sans.className}>Media</span>
                     </Link>
-                    <Link href="/#about-me-section" className="navLink" role="link" aria-label="anchor link to about me section of the homepage">
+                    <Link href="#about-me-section" className="navLink" role="link" aria-label="anchor link to about me section of the homepage">
                         <span className={noto_sans.className}>About Me</span>
                     </Link>
                     <Link href="timeline" className="navLink" rel="external" role="link" aria-label="anchor link to cv page">
@@ -47,6 +48,6 @@ export default async function NavBarGlobal() {
                 {/* Indicator that dynamically changes in length based on how far down the person has scrolled down the web page. */}
                 <div className="progressBar"></div>
             </div>
-    </header>
+        </header>
     );
 }

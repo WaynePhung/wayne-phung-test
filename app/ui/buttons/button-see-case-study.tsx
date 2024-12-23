@@ -3,7 +3,7 @@ import { icons } from "../icons/images-icons";
 import Image from "next/image";
 import { size_space_num } from "../../utils/size-spacing/nums-size-space";
 
-export default async function ButtonSeeCaseStudy() {
+export default function ButtonSeeCaseStudy() {
     return (
         <>
             <span className={noto_sans.className}>See Case Study</span>

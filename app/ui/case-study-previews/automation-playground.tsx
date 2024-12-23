@@ -5,7 +5,7 @@ import { images } from "../media/media-global";
 import ButtonSeeCaseStudy from "../buttons/button-see-case-study";
 
 
-export default async function AutoPG() {
+export default function AutoPG() {
     return (
         <article className="grid-default-1400 grid-case-study-preview">
             <article>

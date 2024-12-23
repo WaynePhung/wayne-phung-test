@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import Footer from "../../ui/footer/footer-home";
+import Footer from "../../ui/footer/footer";
 import "./../../ui/globals.css";
 import "./../../page.css";
-import NavBarGlobal from "../../ui/nav-bar/nav-bar-global";
+import NavBarGlobal from "../../ui/nav-bar/header";
 
 export const metadata: Metadata = {
   icons: {
@@ -52,22 +52,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <body>
-        <NavBarGlobal />
-        {children}
-          <Footer />
-          <Script 
-            type="module" 
-            src="./../js/global-layout.js"
-            strategy="beforeInteractive"
-          />
-          {/* <Script type="text/javascript" src="./../js/footer.js" strategy="afterInteractive" /> */}
-          {/* <script 
-            type="module" 
-            src="./../js/global-layout.js"
-            // strategy="beforeInteractive"
-          ></script> */}
-      </body>
+      {children}
     </>
   );
 }

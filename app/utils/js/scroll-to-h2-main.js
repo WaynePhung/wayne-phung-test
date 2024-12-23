@@ -1,3 +1,5 @@
+import { get } from "http";
+
 export var 
     main = document.querySelector('main'),
     titleSection = document.getElementById('title'),
@@ -27,7 +29,7 @@ export function changeStickyH2() {
             // console.log('scrollPosition: ' + scrollPosition);
             // console.log('sectionTop: ' + sectionTop);
             // console.log('sectionBottom: ' + sectionBottom);
-            unstickH2(h2Headings[i]);
+            // unstickH2(h2Headings[i]);
             if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
                 console.log('Add sticky.');
                 stickH2(h2Headings[i]);
@@ -54,47 +56,34 @@ export function stickH2(selectedh2) {
     } else {
         selectedh2.style.top = `${headerHeight}px`;
     }
-    const wrapper = findH2Wrapper(selectedh2, '.h2-wrapper');
-    if (wrapper) {
-        // Remove the existing parent.
-        if (wrapper.matches('h2')) {
-            // Do nothing.
-        } else {
-            // Remove the existing parent.
-            wrapper.parentNode.removeChild(wrapper);
-        }
+    if (selectedh2.parentElement.matches('.h2-wrapper')) {
+        // Do nothing.
+    } else {
+        const newWrapper = document.createElement('article');
+        newWrapper.className = 'h2-wrapper';
+        selectedh2.parentNode.insertBefore(newWrapper, selectedh2);
+        newWrapper.appendChild(selectedh2);
+        newWrapper.style.width = "100%";
+        newWrapper.style.height = `${newWrapper.querySelector('h2').offsetHeight}px`;
     }
-    const newWrapper = document.createElement('article');
-    newWrapper.className = 'h2-wrapper';
-    selectedh2.parentNode.insertBefore(newWrapper, selectedh2);
-    newWrapper.appendChild(selectedh2);
-    newWrapper.style.width = "100%";
-    newWrapper.style.height = `${newWrapper.querySelector('h2').offsetHeight}px`;
 }
 
 export function unstickH2(selectedh2) {
     selectedh2.classList.remove('h2-sticky', 'sticky');
     selectedh2.style.top = '';
     
-    const wrapper = findH2Wrapper(selectedh2, '.h2-wrapper');
-    if (wrapper) {
-        // Move the element to where the parent was.
-        wrapper.parentNode.insertBefore(selectedh2, wrapper.nextSibling);
-        if (wrapper.matches('h2')) {
-            // Do nothing.
-        } else {
-            // Remove the existing parent.
-            wrapper.parentNode.removeChild(wrapper);
-        }
+    if (selectedh2.closest('.h2-wrapper')) {
+        let h2Wrapper = selectedh2.closest('.h2-wrapper');
+        h2Wrapper.parentNode.replaceChild(selectedh2, h2Wrapper);
+    } else {
+        // Do nothing.
     }
 }
 
-export function findH2Wrapper(selectedh2, selector) {
-    while (selectedh2.parentElement) {
-        if (selectedh2.parentElement.matches(selector)) {
-            return selectedh2.closest(selector);
-        }
-        selectedh2 = selectedh2.parentElement;
-    }
-    return null;
-}
+// export function findH2Wrapper(selectedh2, selector) {
+//     if (selectedh2.parentElement.matches(selector)) {
+//         selectedh2 = selectedh2.closest(selector);
+//         return selectedh2.closest(selector);
+//     }
+//     return null;
+// }

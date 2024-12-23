@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./ui/globals.css";
 import "./page.css";
-import Script from "next/script";
+// import Script from "next/script";
 
 export const metadata: Metadata = {
   icons: {
@@ -55,11 +55,11 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning={true}>
         <body>
           {children}
-          <Script 
+          {/* <Script 
             type="module" 
             src="./js/global-layout.js"
             strategy="beforeInteractive"
-          />
+          /> */}
         </body>
       </html>
     </>
